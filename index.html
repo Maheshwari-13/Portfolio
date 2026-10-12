@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anushka Maheshwari | Exploring the Technology</title>
+  <meta name="description" content="Portfolio of Anushka Maheshwari, a BTech CSE student at SATI who builds with C, data structures and algorithms, and the web.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234338CA'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='700' text-anchor='middle' fill='white'%3EA%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F4F6FB;
+      --surface: #FFFFFF;
+      --ink: #14182B;
+      --muted: #4A5070;
+      --line: #D9DEEE;
+      --accent: #4338CA;
+      --accent-ink: #FFFFFF;
+      --code-bg: #14182B;
+      --code-ink: #E8EAF5;
+      --caret: #F2B33D;
+
+      --font-head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+      --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+      --font-code: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0F1220; --surface: #181C30; --ink: #E8EAF5; --muted: #A3A8C3;
+        --line: #2A3050; --accent: #9AA2FF; --accent-ink: #0F1220; --code-bg: #090B16;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0F1220; --surface: #181C30; --ink: #E8EAF5; --muted: #A3A8C3;
+      --line: #2A3050; --accent: #9AA2FF; --accent-ink: #0F1220; --code-bg: #090B16;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.75rem, 5vw, 2.4rem); margin-bottom: 1.25rem; }
+    h3 { font-size: 1.3rem; margin-bottom: .4rem; }
+    p { margin: 0 0 1rem; max-width: 62ch; }
+
+    .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+    section { padding: 4rem 0; border-top: 1px solid var(--line); }
+    .skip {
+      position: absolute; left: -999px; top: 0; background: var(--accent); color: var(--accent-ink);
+      padding: .6rem 1rem; z-index: 20;
+    }
+    .skip:focus { left: 1rem; top: 1rem; }
+
+    header.site {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 60px; }
+    .brand { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+    nav { display: flex; align-items: center; gap: 1.1rem; }
+    nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: .98rem; }
+    nav a:hover { color: var(--accent); }
+    .nav-links { display: none; gap: 1.1rem; }
+    .theme-btn {
+      border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;
+      display: grid; place-items: center;
+    }
+    @media (min-width: 720px) { .nav-links { display: flex; } }
+
+    .hero { padding: 3.5rem 0 4.5rem; border-top: 0; }
+    .hero-grid { display: grid; gap: 2.5rem; align-items: center; }
+    .hero h1 { font-size: clamp(2.4rem, 8vw, 4.2rem); margin-bottom: 1rem; }
+    .hero .lead { font-size: 1.2rem; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+    .btn {
+      display: inline-block; padding: .75rem 1.3rem; border-radius: 10px; font-weight: 600;
+      text-decoration: none; border: 2px solid var(--accent);
+    }
+    .btn.primary { background: var(--accent); color: var(--accent-ink); }
+    .btn.ghost { color: var(--accent); }
+    .btn:hover { filter: brightness(1.08); }
+
+    .code-window {
+      background: var(--code-bg); color: var(--code-ink);
+      border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
+    }
+    .code-bar { display: flex; align-items: center; gap: .4rem; padding: .65rem .9rem; border-bottom: 1px solid #2A3050; }
+    .code-bar i { width: 10px; height: 10px; border-radius: 50%; background: #3A4166; display: block; }
+    .code-bar span { margin-left: .5rem; font: .8rem var(--font-code); color: #A3A8C3; }
+    .code-window pre {
+      margin: 0; padding: 1.1rem 1.2rem 1.4rem; min-height: 11.5rem;
+      font: .92rem/1.7 var(--font-code); white-space: pre-wrap; overflow-x: auto;
+    }
+    .caret {
+      display: inline-block; width: .55em; height: 1.1em; background: var(--caret);
+      vertical-align: text-bottom; margin-left: 2px; animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.15fr 1fr; } }
+
+    .about-grid { display: grid; gap: 2rem; }
+    .skills { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+    .skills li {
+      border: 1px solid var(--line); background: var(--surface);
+      padding: .35rem .85rem; border-radius: 999px; font-weight: 500; font-size: .98rem;
+    }
+    .side-title { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; margin-bottom: .75rem; }
+    @media (min-width: 860px) { .about-grid { grid-template-columns: 1.3fr 1fr; gap: 4rem; } }
+
+    .projects { display: grid; gap: 1.5rem; }
+    .project {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .shot {
+      aspect-ratio: 16 / 10; background: var(--code-bg); color: #A3A8C3;
+      display: grid; place-items: center; font: .85rem var(--font-code); text-align: center; padding: 1rem;
+    }
+    .shot img { width: 100%; height: 100%; object-fit: cover; }
+    .project-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+    .project-body p { color: var(--muted); }
+    .tags { font-size: .9rem; color: var(--muted); margin-bottom: 1rem; }
+    .links { margin-top: auto; display: flex; gap: 1.1rem; font-weight: 600; }
+    @media (min-width: 720px) { .projects { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .projects { grid-template-columns: repeat(3, 1fr); } }
+
+    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; max-width: 720px; }
+    .timeline li { padding-left: 1.25rem; border-left: 3px solid var(--accent); }
+    .timeline strong { font-family: var(--font-head); font-size: 1.1rem; display: block; }
+    .timeline span { color: var(--muted); }
+
+    .contact-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .6rem; font-size: 1.1rem; }
+    .contact-list b { display: inline-block; min-width: 5.5rem; font-weight: 600; }
+
+    footer { padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .caret { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="#top">Anushka M.</a>
+      <nav aria-label="Main">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#achievements">Achievements</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>Hi, I'm Anushka Maheshwari.</h1>
+          <p class="lead">I'm a second-year computer science student at SATI who loves solving problems with C and data structures, and I'm learning to build for the web.</p>
+          <div class="actions">
+            <a class="btn primary" href="#projects">See my projects</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="code-window" aria-label="A short C program that prints a greeting">
+          <div class="code-bar" aria-hidden="true"><i></i><i></i><i></i><span>hello.c</span></div>
+          <pre><code id="typed"></code><span class="caret" aria-hidden="true"></span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div>
+          <h2>About me</h2>
+          <p>I'm studying BTech in Computer Science and Engineering at Samrat Ashok Technological Institute (SATI), Vidisha, and I'm aiming to become a software engineer.</p>
+          <p>I enjoy breaking a problem into small steps and finding the cleanest way to solve it. That's why data structures and algorithms is my favourite part of the course. I completed a college internship on DSA, and I'm now using what I've learned to build real projects.</p>
+          <!-- TODO: add one sentence about what you want to build or learn next -->
+        </div>
+        <div>
+          <div class="side-title">Skills I use</div>
+          <ul class="skills">
+            <li>C</li>
+            <li>Data Structures &amp; Algorithms</li>
+            <li>HTML</li>
+            <li>Java (basics)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <!-- TODO: Keep your 2 or 3 best projects, strongest first.
+             Replace each .shot div with:
+             <img src="images/your-screenshot.png" alt="Describe what the screenshot shows">
+             then update the title, description, tools and both links. -->
+        <div class="projects">
+
+          <article class="project">
+            <div class="shot"><img src="Project1.png" alt="Portfolio"></div>
+            <div class="project-body">
+              <h3>Portfolio</h3>
+              <p>This project uses the concepts of web development.</p>
+              <div class="tags">HTML.CSS.JavaScript</div>
+              <div class="links">
+                <a href="#">Live demo</a>
+                <a href="https://github.com/Maheshwari-13">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+      <div class="wrap">
+        <h2>Achievements</h2>
+        <ul class="timeline">
+          <li>
+            <strong>DSA internship, SATI</strong>
+            <span>In-house college internship on Data Structures &amp; Algorithms.</span>
+          </li>
+          <li>
+            <strong>CGPA 9.18</strong>
+            <span>BTech CSE, second year, Samrat Ashok Technological Institute.</span>
+          </li>
+          <li>
+            <strong>Gold Badge in C</strong>
+            <span>5 star at HackerRank, Coding Platform.</span>
+          </li>
+          <!-- TODO: add certificates, hackathons and SATI Coding Club activities, one <li> each -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <h2>Let's talk</h2>
+        <p>I'm open to internships, collaborations and feedback on my work. The easiest way to reach me is email.</p>
+        <ul class="contact-list">
+          <li><b>Email</b> <a href="mailto:your-email@example.com">anushkamaheshwari1304@gmail.com</a></li>
+          <li><b>GitHub</b> <a href="https://github.com/Maheshwari-13">github</a></li>
+          <li><b>LinkedIn</b> <a href="https://www.linkedin.com/in/anushka-maheshwari-a63b09385?utm_source=share_via&utm_content=profile&utm_medium=member_android">linkedin-profile</a></li>
+          <li><b>Resume</b> <a href="Doc1 (1)-2.pdf">Download PDF</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year">2026</span> Anushka Maheshwari. Built with HTML, CSS and JavaScript.</div>
+  </footer>
+
+  <script>
+    /* Typing effect (shows full text instantly if motion is reduced) */
+    (function () {
+      var code =
+        '#include <stdio.h>\n\n' +
+        'int main() {\n' +
+        '    printf("Hi, I\'m Anushka.\\n");\n' +
+        '    printf("Let\'s build something.\\n");\n' +
+        '    return 0;\n' +
+        '}';
+      var el = document.getElementById('typed');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) { el.textContent = code; return; }
+      var i = 0;
+      (function type() {
+        el.textContent = code.slice(0, i++);
+        if (i <= code.length) setTimeout(type, 45);
+      })();
+    })();
+
+    /* Dark mode toggle (remembers the choice) */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('themeBtn');
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved) root.setAttribute('data-theme', saved);
+
+      function isDark() {
+        var t = root.getAttribute('data-theme');
+        if (t) return t === 'dark';
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function paint() {
+        btn.textContent = isDark() ? '☀️' : '🌙';
+        btn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        paint();
+      });
+      paint();
+    })();
+
+    /* Footer year */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
